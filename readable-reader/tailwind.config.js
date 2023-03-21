@@ -1,0 +1,76 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+  ],
+  safelist: [
+    { pattern: /^bg-/ },
+    { pattern: /^text-/ },
+    { pattern: /^fill-/ },
+    { pattern: /^border-/ },
+    { pattern: /^ring-/ },
+    { pattern: /^stroke-/ },
+    { pattern: /^shadow-/ },
+  ],
+  theme: {
+    extend: {
+      screens: {
+        '3xl': '1920px',
+      },
+      fontFamily: {
+        rockwell: ['Rockwell'],
+        overpass: ['Overpass'],
+        sourceserifpro: ['Source Serif Pro'],
+        atkinsonhyperlegible: ['Atkinson Hyperlegible'],
+        comicneue: ['Comic Neue'],
+        opendyslexic: ['open-dyslexic'],
+        klinicslab: ['KlinicSlab'],
+      },
+      colors: {
+        accent: {
+          DEFAULT: '#334B99',
+          50: '#A3B2E0',
+          100: '#94ADFF',
+          200: '#758BD1',
+          300: '#5771C7',
+          400: '#3D5AB8',
+          500: '#334B99',
+          600: '#25366F',
+          700: '#172245',
+          800: '#090D1B',
+          900: '#000000',
+        },
+        black: {
+          DEFAULT: '#000000',
+          50: '#000000',
+          100: '#000000',
+          200: '#000000',
+          300: '#000000',
+          400: '#000000',
+          500: '#000000',
+          600: '#000000',
+          700: '#000000',
+          800: '#000000',
+          900: '#000000',
+        },
+        white: {
+          DEFAULT: '#ffffff',
+          50: '#ffffff',
+          100: '#ffffff',
+          200: '#ffffff',
+          300: '#ffffff',
+          400: '#ffffff',
+          500: '#ffffff',
+          600: '#ffffff',
+          700: '#ffffff',
+          800: '#ffffff',
+          900: '#ffffff',
+        },
+      },
+      animation: {
+        'spin-two': 'spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite',
+      },
+    },
+  },
+  plugins: [],
+};

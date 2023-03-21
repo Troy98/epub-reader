@@ -1,0 +1,115 @@
+
+@import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
+
+/* Overpass */
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Source Serif Pro */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+/* Atkinson Hyperlegible */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Comic Neue */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* KlinicSlab */
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabBold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabBoldIt.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabLightIt.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabBook.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabBookIt.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabMedium.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KlinicSlab';
+  src: url('./KlinicSlab/KlinicSlabMediumIt.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* OpenDyslexic */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('./OpenDyslexic/otf/OpenDyslexic-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('./OpenDyslexic/otf/OpenDyslexic-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('./OpenDyslexic/otf/OpenDyslexic-Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('./OpenDyslexic/otf/OpenDyslexic-BoldItalic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('./OpenDyslexic/woff/OpenDyslexic-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('./OpenDyslexic/woff/OpenDyslexic-Bold-Italic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('./OpenDyslexic/woff/OpenDyslexic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('./OpenDyslexic/woff/OpenDyslexic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

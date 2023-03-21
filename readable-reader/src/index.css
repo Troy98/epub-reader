@@ -1,0 +1,54 @@
+@import url('./fonts/fonts.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-slide div::-webkit-scrollbar {
+  display: none;
+}
+
+.swiper-slide div {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.swiper-button-disabled {
+    display: none;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--accent-color) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--accent-color) !important;
+}
+
+.icon-top-left {
+    clip-path: circle(50% at 0 0);
+}
+
+.icon-back-button {
+    clip-path: circle(50% at 100% 100%);
+}
+
+.icon-top-right {
+    clip-path: circle(50% at 100% 0);
+}
+
+.icon-bottom-left {
+    clip-path: circle(50% at 0 100%);
+}
+
+@media (min-width: 1536px) {
+    .icon-back-button {
+    clip-path: circle(50% at 0 100%);
+    }
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
