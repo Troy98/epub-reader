@@ -17,13 +17,12 @@ import Header from '../components/Header';
 import TextButton from '../components/TextButton';
 import ScreenNotification from '../components/ScreenNotification';
 import ModalContainer from '../components/ModalContainer';
-// eslint-disable-line import/no-default-export
 import UploadModal from '../components/Modals/UploadModal';
 import OnClickButton from '../components/OnClickButton';
 // CSS For swiper
-import 'swiper/css'; // eslint-disable-line import/no-unresolved
-import 'swiper/css/pagination'; // eslint-disable-line import/no-unresolved
-import 'swiper/css/navigation'; // eslint-disable-line import/no-unresolved
+import 'swiper/css';
+import 'swiper/css/pagination'; 
+import 'swiper/css/navigation'; 
 
 const serverURL = process.env.REACT_APP_API_URL;
 

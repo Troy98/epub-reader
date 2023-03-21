@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, PenTool } from 'react-feather';
 import ePub from 'epubjs';
-// eslint-disable-next-line import/no-unresolved
 import WebFont from 'webfontloader';
 import InlineView from 'epubjs/lib/managers/views/inline';
 import { getLayoutActionAsync } from '../actions/userActionCreator';

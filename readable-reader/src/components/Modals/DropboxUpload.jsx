@@ -1,9 +1,8 @@
 import React from 'react';
-/* eslint import/no-unresolved: [2, { ignore: ['react-dropbox-chooser'] }] */
 import DropboxChooser from 'react-dropbox-chooser';
 import { useSelector } from 'react-redux';
 import { Check, Loader } from 'react-feather';
-import Dropbox from '../Icons/Dropbox';
+// import Dropbox from '../Icons/Dropbox';
 
 const APP_KEY = process.env.REACT_APP_DROPBOX_KEY;
 
