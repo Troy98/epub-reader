@@ -9,7 +9,7 @@
     "hyphen": "^1.6.4",
     "languagedetect": "^2.0.0",
     "react": "^16.8.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^16.8.0",
     "react-dropbox-chooser": "^0.0.5",
     "react-feather": "^2.0.10",
     "react-hyphen": "^1.4.0",
