@@ -30,12 +30,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* <Route path="/" element={<Login />} /> */}
         <Route path="/registreren" element={<Register />} />
         {/* Protected Routes */}
         <Route element={<PrivateRoutes />}>
           <Route path="/ebook/:id" element={<Reader />} />
-          <Route path="/bibliotheek" element={<Library />} />
+          {/* <Route path="/bibliotheek" element={<Library />} /> */}
+          <Route path="/" element={<Library />} />
           <Route path="/readerhtml/:id" element={<ReaderHTML />} />
         </Route>
       </Routes>
