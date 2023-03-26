@@ -3,15 +3,15 @@ module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
   ],
-  // safelist: [
-  //   { pattern: /^bg-/ },
-  //   { pattern: /^text-/ },
-  //   { pattern: /^fill-/ },
-  //   { pattern: /^border-/ },
-  //   { pattern: /^ring-/ },
-  //   { pattern: /^stroke-/ },
-  //   { pattern: /^shadow-/ },
-  // ],
+  safelist: [
+    { pattern: /^bg-/ },
+    { pattern: /^text-/ },
+    { pattern: /^fill-/ },
+    { pattern: /^border-/ },
+    { pattern: /^ring-/ },
+    { pattern: /^stroke-/ },
+    { pattern: /^shadow-/ },
+  ],
   theme: {
     extend: {
       screens: {
