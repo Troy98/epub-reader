@@ -125,7 +125,7 @@ function Library() {
                 id="book-container"
                 data-id={ebook.url.href}
               >
-                <Link className="flex flex-col gap-y-4 justify-center sm:px-10 w-full h-fit" id="book-link" to={`/readerhtml/${ebook._id}`}>
+                <Link className="flex flex-col gap-y-4 justify-center sm:px-10 w-full h-fit" id="book-link" to={`/reader`}>
                   <div className="w-full flex justify-center">
                     <img src={coverImage} className="object-cover rounded-xl h-72 xl: pointer-events-none" alt="cover" />
                   </div>

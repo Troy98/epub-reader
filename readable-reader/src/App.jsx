@@ -29,14 +29,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/test" element={<Library />} />
-      <Route path="/readerhtml" element={<ReaderHTML />} />
+      <Route path="/" element={<Library />} />
+      {/* <Route path="/readerhtml" element={<ReaderHTML />} /> */}
         {/* <Route path="/" element={<Login />} /> */}
         {/* <Route path="/registreren" element={<Register />} /> */}
         {/* Protected Routes */}
           {/* <Route path="/ebook" element={<Reader />} /> */}
           {/* <Route path="/bibliotheek" element={<Library />} /> */}
-          <Route path="/" element={<ReaderHTML />} />
+          <Route path="/reader" element={<ReaderHTML />} />
       </Routes>
     </BrowserRouter>
   );
