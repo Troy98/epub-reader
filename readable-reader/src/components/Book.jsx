@@ -252,7 +252,7 @@ function Book() {
       generateHTMLBook();
     }
     return () => {
-      removeStyleSheets();
+      // removeStyleSheets();
     };
   }, [ebook]);
 
