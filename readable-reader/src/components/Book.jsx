@@ -73,6 +73,12 @@ function Book() {
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+  }, []);
+
+  useEffect(() => {
     dispatch(setFontSizeAction(fontSizeState  + 'px'));
     dispatch(setLineHeightAction(lineHeightState));
     dispatch(setBackgroundColorAction(backgroundColorState));
@@ -210,7 +216,6 @@ function Book() {
   };
 
   const hyphenateText = async (contents) => {
-    setIsLoading(true);
     const allElements = contents.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, span');
     for (let i = 0; i < allElements.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
@@ -230,7 +235,7 @@ function Book() {
       removeLinks(contents);
       removeStylingFromLinks(contents);
       await hyphenateText(contents);
-      setIsLoading(false);
+      // setIsLoading(false);
 
       // Remove the spaces
       const filteredContents = contents.innerHTML.replace(/&nbsp;/g, '');
