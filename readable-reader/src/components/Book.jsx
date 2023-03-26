@@ -6,6 +6,14 @@ import ePub from 'epubjs';
 import WebFont from 'webfontloader';
 import { hyphenateHTMLSync } from 'hyphen/nl';
 import { getLayoutActionAsync } from '../actions/userActionCreator';
+import { setFontSizeAction } from '../actions/userActionCreator';
+import { setLineHeightAction } from '../actions/userActionCreator';
+import { setBackgroundColorAction } from '../actions/userActionCreator';
+import { setTextColorAction } from '../actions/userActionCreator';
+import { setAccentColorTailwindFormatAction } from '../actions/userActionCreator';
+import { setAccentColorHexFormatAction } from '../actions/userActionCreator';
+import { setFontFamilyAction } from '../actions/userActionCreator';
+import { setLetterSpacingAction } from '../actions/userActionCreator';
 import IconButton from './IconButton';
 import OnClickButton from './OnClickButton';
 import '../Reader.css';
@@ -17,6 +25,9 @@ import ChangeTextLayout from './LayoutPanels/ChangeTextLayout';
 import ChangeColorLayout from './LayoutPanels/ChangeColorLayout';
 import LayoutContainer from './LayoutPanels/LayoutContainer';
 import Icon from './Panel/Icon';
+// import LocalBook from '../ebooks/AAiW.epub';
+import LocalBook from '../ebooks/test3.epub';
+
 
 const serverURL = process.env.REACT_APP_API_URL;
 
@@ -26,59 +37,53 @@ function Book() {
     fontSize, lineHeight, backgroundColor, textColor,
     accentColorTailwindFormat, accentColorHexFormat, fontFamily, letterSpacing,
   } = useSelector((state) => state.users);
+
+  console.log('fontSize', fontSize);
+
+  
   const dispatch = useDispatch();
 
   const scrollPosition = useScrollPosition();
   const navigate = useNavigate();
 
+
+  const [fontSizeState, setFontSizeState] = useState(fontSize);
+  const [lineHeightState, setLineHeightState] = useState(lineHeight);
+  const [backgroundColorState, setBackgroundColorState] = useState(backgroundColor);
+  const [textColorState, setTextColorState] = useState(textColor);
+  const [accentColorTailwindFormatState, setAccentColorTailwindFormatState] = useState(accentColorTailwindFormat);
+  const [accentColorHexFormatState, setAccentColorHexFormatState] = useState(accentColorHexFormat);
+  const [fontFamilyState, setFontFamilyState] = useState(fontFamily);
+  const [letterSpacingState, setLetterSpacingState] = useState(letterSpacing);
+
+  console.log('fontSizeState', fontSizeState);
+
   const [isLoading, setIsLoading] = useState(true);
-  const [scrollPositionState, setScrollPositionState] = useState('');
-  const [scrollPositionDBState, setScrollPositionDBState] = useState('');
-  const { deletedEbookID } = useSelector((state) => state.ebooks);
-  const [showModal, setShowModal] = useState(false);
   const [ebook, setEBook] = useState(undefined);
-  const { id } = useParams();
   const [changeTextToggled, setChangeTextToggled] = useState(false);
   const [changeColorToggled, setChangeColorToggled] = useState(false);
   const isHelper = localStorage.getItem('isHelper');
-  const fontSizetoNumber = fontSize.replace('px', '');
+
 
   useEffect(() => {
-    if (!isHelper) {
-      setScrollPositionState(scrollPosition);
-    }
-  }, [scrollPosition]);
-
-  const screenNotificationHandler = () => {
-    navigate('/bibliotheek');
-    setShowModal(false);
-  };
+    const book = new ePub(LocalBook);
+    book.loaded.navigation.then(() => {
+      setEBook(book);
+    });
+  }, []);
 
   useEffect(() => {
-    if (id === deletedEbookID) {
-      setShowModal(true);
-    }
-  }, [deletedEbookID]);
+    dispatch(setFontSizeAction(fontSizeState  + 'px'));
+    dispatch(setLineHeightAction(lineHeightState));
+    dispatch(setBackgroundColorAction(backgroundColorState));
+    dispatch(setTextColorAction(textColorState));
+    dispatch(setAccentColorTailwindFormatAction(accentColorTailwindFormatState));
+    dispatch(setAccentColorHexFormatAction(accentColorHexFormatState));
+    dispatch(setFontFamilyAction(fontFamilyState));
+    dispatch(setLetterSpacingAction(letterSpacingState + 'px'));
+  }, [fontSizeState, lineHeightState, backgroundColorState, textColorState, accentColorTailwindFormatState, accentColorHexFormatState, fontFamilyState, letterSpacingState]);
+  
 
-  useEffect(() => {
-    const getEbookFromUrlId = async () => {
-      const response = await fetch(`${serverURL}/api/v1/reader/books/${id}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-
-      const book = await response.json();
-      setScrollPositionDBState(book.scrollPosition);
-      setEBook(ePub(`${serverURL}/${book.path}`));
-    };
-    getEbookFromUrlId()
-      .catch(/* Displaying an error to the user has no effect */);
-  }, [id]);
-
-  const renderBookLayout = async () => {
-    if (await ebook.ready) {
-      dispatch(getLayoutActionAsync());
-    }
 
     WebFont.load({
       google: {
@@ -90,31 +95,6 @@ function Book() {
       },
       context: window.frames[0],
     });
-  };
-
-  useEffect(() => {
-    if (scrollPositionState) {
-      fetch(`${serverURL}/api/v1/reader/books/${id}`, {
-        credentials: 'include',
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          scrollPosition: scrollPositionState,
-        }),
-      }).catch(/* Displaying an error to the user has no effect */);
-    }
-  }, [scrollPositionState]);
-
-  useEffect(() => {
-    if (ebook) {
-      const render = async () => {
-        await renderBookLayout();
-      };
-      render().catch(/* Displaying an error to the user has no effect */);
-    }
-  }, [ebook]);
 
   useEffect(() => {
     if (ebook) {
@@ -132,28 +112,6 @@ function Book() {
     }
   };
 
-  /**
-   * Changes a style option in the database
-   * @param {*} changedStyle The style that is changed (for example: 'fontSize, lineHeight, etc')
-   * @param {*} value The value of the style (for example: '1.5')
-   * @param {*} valueType The type of value (for example: 'rem')
-   */
-  const changeStyleInDb = async (changedStyle, value, valueType) => {
-    try {
-      await fetch(`${serverURL}/api/v1/helper/users/layout`, {
-        credentials: 'include',
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          value,
-          valueType,
-          typeOfLayout: changedStyle,
-        }),
-      });
-    } catch { /* Displaying an error to the user has no effect */ }
-  };
 
   // Sometimes the urls in the html won't match the urls in the book object, this regex fixes that
   const regex = /\/|\.|\?/g;
@@ -292,10 +250,6 @@ function Book() {
         setHTMLBook(html);
       };
       generateHTMLBook();
-      setTimeout(() => {
-        window.scrollTo(0, scrollPositionDBState);
-        setIsLoading(false);
-      }, 500);
     }
     return () => {
       removeStyleSheets();
@@ -304,15 +258,9 @@ function Book() {
 
   return (
     <div id="reader-confirmed">
-      {showModal && (
-      <ScreenNotification
-        onClick={screenNotificationHandler}
-        text="Het boek dat u aan het lezen was is zojuist verwijderd."
-      />
-      )}
       {isLoading && <Loader />}
       <IconButton
-        to="/bibliotheek"
+        to="/"
         id="reader-back-button"
         style={{ backgroundColor: accentColorHexFormat, color: accentColorTailwindFormat !== 'white' ? 'white' : 'black' }}
         icon={<ChevronLeft className="h-12 w-12 absolute 2xl:left-6 bottom-6 right-6" />}
@@ -327,15 +275,18 @@ function Book() {
           id="color-config-button"
           type="button"
           disabled={false}
+          style={{ backgroundColor: accentColorHexFormat, color: accentColorTailwindFormat !== 'white' ? 'white' : 'black' }}
           onClick={() => toggleRender('color')}
           styleString={`relative top-24 z-40 flex justify-center items-center rounded-r-md absolute
           bg-${accentColorTailwindFormat}-500 h-10 w-10 hover:w-11 hover:brightness-90 duration-300`}
           value={<PenTool size={20} className={`text-${accentColorTailwindFormat !== 'white' ? 'white' : 'black'}`} />}
+          color={accentColorTailwindFormat}
         />
         <OnClickButton
           id="text-config-button"
           type="button"
           disabled={false}
+          style={{ backgroundColor: accentColorHexFormat, color: accentColorTailwindFormat !== 'white' ? 'white' : 'black' }}
           onClick={() => toggleRender('text')}
           styleString={`text-config-button relative bg-${accentColorTailwindFormat}-500 rounded-r-md absolute 
           top-0 h-10 w-10 hover:w-11 hover:brightness-90 duration-300`}
@@ -356,22 +307,14 @@ function Book() {
         icon={<Icon icon={<p className="absolute font-rockwell text-white left-4 top-3 text-3xl">T</p>} />}
       >
         <ChangeTextLayout
-          onFontSizeChange={async (newFontSize) => {
-            await changeStyleInDb('fontSize', newFontSize, 'px');
-          }}
-          onLineHeightChange={async (newLineHeight) => {
-            await changeStyleInDb('lineHeight', newLineHeight, '%');
-          }}
-          onLetterSpacingChange={async (newLetterSpacing) => {
-            const actualLetterSpacing = (newLetterSpacing / 1000).toString();
-            await changeStyleInDb('letterSpacing', actualLetterSpacing, 'em');
-          }}
-          onFontFamilyChange={async (newFontFamily) => {
-            await changeStyleInDb('fontFamily', newFontFamily, '');
-          }}
+          onFontSizeChange={setFontSizeState}
+          onLineHeightChange={setLineHeightState}
+          onLetterSpacingChange={setLetterSpacingState}
+          onFontFamilyChange={setFontFamilyState}
+
           defaultFontSize={fontSize.replace(/[^0-9]/g, '')}
           defaultLineHeight={lineHeight.replace(/[^0-9]/g, '')}
-          defaultLetterSpacing={(letterSpacing.replace(/[^.0-9]/g, '')) * 1000}
+          defaultLetterSpacing={(letterSpacing.replace(/[^.0-9]/g, ''))}
           defaultFontFamily={fontFamily}
           fontFamilyOptions={['Overpass', 'Source Serif Pro', 'Atkinson Hyperlegible', 'Comic Neue', 'KlinicSlab', 'OpenDyslexic']}
         />
@@ -383,11 +326,14 @@ function Book() {
         icon={<Icon icon={<PenTool className="absolute font-rockwell text-white left-4 top-3 text-3xl" />} />}
       >
         <ChangeColorLayout
+
           onChange={async (newColors) => {
-            await changeStyleInDb('backgroundColor', newColors.backgroundColor, '');
-            await changeStyleInDb('textColor', newColors.textColor, '');
-            await changeStyleInDb('accentColor', JSON.stringify(newColors.accentColor), '');
+            setBackgroundColorState(newColors.backgroundColor);
+            setTextColorState(newColors.textColor);
+            setAccentColorTailwindFormatState(newColors.accentColor.tailwindFormat);
+            setAccentColorHexFormatState(newColors.accentColor.hexFormat);
           }}
+          
           defaultValue={{
             textColor,
             backgroundColor,
@@ -400,14 +346,24 @@ function Book() {
       </LayoutContainer>
       )}
       <div
+        // style={{
+        //   backgroundColor,
+        //   color: textColor,
+        //   fontSize: fontSize,
+        //   fontFamily: fontFamilyState,
+        //   lineHeight: `${lineHeightState}%`,
+        //   letterSpacing: `${letterSpacingState}`,
+        //   wordWrap: fontSizeState <= 300 ? 'normal' : 'break-word',
+        // }}
+
         style={{
           backgroundColor,
           color: textColor,
-          fontSize,
-          fontFamily,
-          lineHeight,
-          letterSpacing,
-          wordWrap: fontSizetoNumber <= 300 ? 'normal' : 'break-word',
+          fontSize: fontSize,
+          fontFamily: fontFamily,
+          lineHeight: `${lineHeight}%`,
+          letterSpacing: letterSpacing,
+          wordWrap: fontSize <= 300 ? 'normal' : 'break-word',
         }}
         id="reader123"
         className="reader px-11 overflow-hidden"

@@ -42,7 +42,7 @@ function ChangeTextLayout(props) {
         onChange={onLetterSpacingChange}
         defaultValue={defaultLetterSpacing}
         sliderMin="0"
-        sliderMax="200"
+        sliderMax="30"
         title="Letter Spacing"
         unit="%"
       />

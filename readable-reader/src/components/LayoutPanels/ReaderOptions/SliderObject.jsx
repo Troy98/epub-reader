@@ -33,7 +33,7 @@ function SliderObject(props) {
         />
         <div className="flex justify-between">
           <div className="text-xs">{sliderMin + unit}</div>
-          <div className="text-xs">{sliderMax + unit}</div>
+          <div className="text-xs">{"1" + sliderMax + unit}</div>
         </div>
       </div>
       <div className={`flex justify-center rounded-[50%] bg-${accentColorTailwindFormat !== 'white'

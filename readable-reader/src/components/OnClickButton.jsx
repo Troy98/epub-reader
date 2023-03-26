@@ -2,7 +2,7 @@ import React from 'react';
 
 function OnClickButton(props) {
   const {
-    type, disabled, onClick, styleString, value, id,
+    type, disabled, onClick, styleString, value, id, style,
   } = props;
 
   return (
@@ -12,6 +12,7 @@ function OnClickButton(props) {
       disabled={disabled}
       onClick={onClick}
       className={styleString}
+      style={style}
     >
       {value}
     </button>

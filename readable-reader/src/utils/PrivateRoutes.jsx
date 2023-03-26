@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Loader from '../components/Loader';
 
 function PrivateRoutes() {
   const isAuthenticated = localStorage.getItem('token');
-  const [isAuth, setIsAuth] = useState();
+  const [isAuth, setIsAuth] = useState(isAuthenticated !== null);
+  const [isLoading, setIsLoading] = useState(isAuthenticated !== null);
+  const navigate = useNavigate();
 
   const serverURL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    if (isAuthenticated == null) {
+    if (isAuthenticated === null) {
       setIsAuth(false);
+      setIsLoading(false);
       return;
     }
     const checkTokenWithIdOnServer = async (token) => {
@@ -26,19 +29,22 @@ function PrivateRoutes() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
       }
-      setIsAuth(response);
-
-      return isAuth;
+      setIsAuth(response.ok);
+      setIsLoading(false);
     };
 
     checkTokenWithIdOnServer(isAuthenticated);
-  }, [isAuthenticated]);
+  }, [isAuthenticated, serverURL]);
 
-  if (isAuth === undefined) return <Loader />;
+  useEffect(() => {
+    if (!isAuth && !isLoading) {
+      navigate('/');
+    }
+  }, [isAuth, isLoading, navigate]);
 
-  return (
-    isAuth ? <Outlet /> : <Navigate to="/" />
-  );
+  if (isLoading) return <Loader />;
+
+  return isAuth && <Outlet />;
 }
 
 export default PrivateRoutes;
