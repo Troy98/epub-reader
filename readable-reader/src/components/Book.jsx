@@ -91,16 +91,16 @@ function Book() {
   
 
 
-    // WebFont.load({
-    //   google: {
-    //     families: ['Overpass', 'Source Serif Pro', 'Atkinson Hyperlegible', 'Comic Neue'],
-    //   },
-    //   custom: {
-    //     families: ['OpenDyslexic', 'KlinicSlab'],
-    //     urls: ['../fonts/fonts.css'],
-    //   },
-    //   context: window.frames[0],
-    // });
+    WebFont.load({
+      google: {
+        families: ['Overpass', 'Source Serif Pro', 'Atkinson Hyperlegible', 'Comic Neue'],
+      },
+      custom: {
+        families: ['OpenDyslexic', 'KlinicSlab'],
+        urls: ['../fonts/fonts.css'],
+      },
+      context: window.frames[0],
+    });
 
   useEffect(() => {
     if (ebook) {
